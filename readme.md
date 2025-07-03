@@ -1,4 +1,4 @@
-# 📚 Library Management System API (BookNest)
+# 📚 Library Management System API (PaperTrail)
 
 A RESTful Library Management API built with **Express**, **TypeScript**, and **MongoDB (Mongoose)**.  
 This system manages books, borrowing operations, and provides real-time data using MongoDB's aggregation pipeline.
@@ -69,7 +69,7 @@ This project helps solidify concepts like:
 **GET** `/api/books/:bookId`
 
 ### 4. Update Book
-**PATCH** `/api/books/:bookId`
+**PUT** `/api/edit-book/:bookId`
 
 
 ### 5. Delete Book
@@ -128,10 +128,10 @@ This project helps solidify concepts like:
 
 ```bash
 # Clone the repository
-git clone https://github.com/nahidn228/BookNest.git
+git clone https://github.com/nahidn228/PaperTrail.git
 
 # Navigate to the project folder
-cd BookNest
+cd PaperTrail
 
 # Install dependencies
 npm install
