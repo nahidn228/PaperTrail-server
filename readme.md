@@ -1,4 +1,4 @@
-# 📚 Library Management System API (PaperTrail)
+# 📚 Minimal Library Management System 📚 (PaperTrail)
 
 A RESTful Library Management API built with **Express**, **TypeScript**, and **MongoDB (Mongoose)**.  
 This system manages books, borrowing operations, and provides real-time data using MongoDB's aggregation pipeline.

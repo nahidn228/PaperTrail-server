@@ -6,7 +6,12 @@ import routes from "./modules/routes";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://paper-trail-one.vercel.app"],
+  })
+);
+
 app.use(express.json());
 app.use(routes);
 
