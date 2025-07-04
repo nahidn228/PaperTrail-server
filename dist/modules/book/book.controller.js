@@ -33,16 +33,22 @@ const createBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 const getAllBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { filter, sortBy = "createdAt", sort = "asc", limit = "10", } = req.query;
-        const filterCondition = {};
-        if (filterCondition) {
-            filterCondition.genre = filter === null || filter === void 0 ? void 0 : filter.toString().toUpperCase();
-        }
-        const sortCondition = {};
-        sortCondition[sortBy.toString()] = sort === "desc" ? -1 : 1;
-        const data = yield book_model_1.default.find(filterCondition)
-            .sort(sortCondition)
-            .limit(Number(limit));
+        // const {
+        //   filter,
+        //   sortBy = "createdAt",
+        //   sort = "asc",
+        //   limit = "10",
+        // } = req.query;
+        // const filterCondition: Record<string, unknown> = {};
+        // if (filterCondition) {
+        //   filterCondition.genre = filter?.toString().toUpperCase();
+        // }
+        // const sortCondition: Record<string, SortOrder> = {};
+        // sortCondition[sortBy.toString()] = sort === "desc" ? -1 : 1;
+        // const data = await Book.find(filterCondition)
+        //   .sort(sortCondition)
+        //   .limit(Number(limit));
+        const data = yield book_model_1.default.find();
         res.send({
             success: true,
             message: "Books retrieved successfully",

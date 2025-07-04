@@ -7,13 +7,14 @@ export interface IBook {
     | "SCIENCE"
     | "HISTORY"
     | "BIOGRAPHY"
-    | "FANTASY";
+    | "FANTASY"
+    | "CLASSIC"
+    | "PROGRAMMING";
   isbn: string;
   description: string;
   copies: number;
   available: boolean;
   price: number;
-  stock: number;
+  photo: string;
   updateAvailability?: () => void;
 }
-

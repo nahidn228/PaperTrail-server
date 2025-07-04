@@ -17,7 +17,7 @@ const book_model_1 = __importDefault(require("../book/book.model"));
 const borrow_model_1 = __importDefault(require("./borrow.model"));
 const borrowBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { book: bookId, quantity, dueDate } = req.body;
+        const { bookId, quantity, dueDate } = req.body;
         const book = yield book_model_1.default.findById(bookId);
         if (!book) {
             res.status(404).send({
@@ -41,7 +41,7 @@ const borrowBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         }
         yield book.save();
         // Create borrow record
-        const borrow = yield borrow_model_1.default.create({ book: bookId, quantity, dueDate });
+        const borrow = yield borrow_model_1.default.create({ bookId, quantity, dueDate });
         res.status(201).send({
             success: true,
             message: "Book borrowed successfully",
@@ -62,7 +62,7 @@ const getBorrowSummary = (req, res) => __awaiter(void 0, void 0, void 0, functio
             // Step 1: Group by book and sum borrow quantities
             {
                 $group: {
-                    _id: "$book",
+                    _id: "$bookId",
                     totalQuantity: { $sum: "$quantity" },
                 },
             },

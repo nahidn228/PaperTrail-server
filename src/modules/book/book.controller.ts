@@ -22,24 +22,26 @@ const createBook = async (req: Request, res: Response) => {
 
 const getAllBook = async (req: Request, res: Response) => {
   try {
-    const {
-      filter,
-      sortBy = "createdAt",
-      sort = "asc",
-      limit = "10",
-    } = req.query;
+    // const {
+    //   filter,
+    //   sortBy = "createdAt",
+    //   sort = "asc",
+    //   limit = "10",
+    // } = req.query;
 
-    const filterCondition: Record<string, unknown> = {};
-    if (filterCondition) {
-      filterCondition.genre = filter?.toString().toUpperCase();
-    }
+    // const filterCondition: Record<string, unknown> = {};
+    // if (filterCondition) {
+    //   filterCondition.genre = filter?.toString().toUpperCase();
+    // }
 
-    const sortCondition: Record<string, SortOrder> = {};
-    sortCondition[sortBy.toString()] = sort === "desc" ? -1 : 1;
+    // const sortCondition: Record<string, SortOrder> = {};
+    // sortCondition[sortBy.toString()] = sort === "desc" ? -1 : 1;
 
-    const data = await Book.find(filterCondition)
-      .sort(sortCondition)
-      .limit(Number(limit));
+    // const data = await Book.find(filterCondition)
+    //   .sort(sortCondition)
+    //   .limit(Number(limit));
+
+    const data = await Book.find();
 
     res.send({
       success: true,

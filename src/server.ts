@@ -8,7 +8,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://paper-trail-one.vercel.app"],
+    origin: ["https://paper-trail-ui.vercel.app", "http://localhost:5173"],
+    credentials: true,
   })
 );
 

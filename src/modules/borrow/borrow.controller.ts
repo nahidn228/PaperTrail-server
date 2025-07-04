@@ -4,7 +4,7 @@ import Borrow from "./borrow.model";
 
 const borrowBook = async (req: Request, res: Response) => {
   try {
-    const { book: bookId, quantity, dueDate } = req.body;
+    const {  bookId, quantity, dueDate } = req.body;
 
     const book = await Book.findById(bookId);
     if (!book) {
@@ -34,7 +34,7 @@ const borrowBook = async (req: Request, res: Response) => {
     await book.save();
 
     // Create borrow record
-    const borrow = await Borrow.create({ book: bookId, quantity, dueDate });
+    const borrow = await Borrow.create({  bookId, quantity, dueDate });
 
     res.status(201).send({
       success: true,
@@ -57,7 +57,7 @@ const getBorrowSummary = async (req: Request, res: Response) => {
       // Step 1: Group by book and sum borrow quantities
       {
         $group: {
-          _id: "$book",
+          _id: "$bookId",
           totalQuantity: { $sum: "$quantity" },
         },
       },
