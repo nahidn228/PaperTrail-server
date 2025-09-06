@@ -9,32 +9,6 @@ import AppError from "../../error/AppError";
 import mongoose from "mongoose";
 import { IUserFilters, UserServices } from "./user.service";
 
-const registerUser = catchAsync(async (req: Request, res: Response) => {
-  const payload = req.body;
-
-  const data = await UserServices.createUserIntoDB(payload);
-
-  sendResponse(res, {
-    statusCode: status.CREATED,
-    success: true,
-    message: "User registered successfully",
-    data: data,
-  });
-});
-
-const loginUser = catchAsync(async (req: Request, res: Response) => {
-  const payload = req.body;
-
-  const data = await UserServices.loginUserIntoDB(payload);
-
-  sendResponse(res, {
-    statusCode: status.OK,
-    success: true,
-    message: "User Login successfully",
-    data: data,
-  });
-});
-
 const getUsers = catchAsync(async (req: Request, res: Response) => {
   // Extract and parse query params
   const page = parseInt(req.query.page as string) || 1;
@@ -70,6 +44,8 @@ const getUsers = catchAsync(async (req: Request, res: Response) => {
 
 const getSingleUsers = catchAsync(async (req: Request, res: Response) => {
   const token = req.cookies.accessToken;
+
+  console.log(token);
   if (!token) {
     res.status(401).json({ message: "No token found" });
     return;
@@ -171,6 +147,4 @@ export {
   deleteUser,
   getUserById,
   updateUserStatus,
-  registerUser,
-  loginUser,
 };

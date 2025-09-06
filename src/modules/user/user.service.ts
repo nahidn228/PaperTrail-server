@@ -9,6 +9,11 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import { FilterQuery } from "mongoose";
 
+export interface IUserFilters {
+  email?: string;
+  role?: string;
+}
+
 const createUserIntoDB = async (payload: IUser) => {
   payload.password = await bcrypt.hash(
     payload.password,
@@ -38,21 +43,17 @@ const loginUserIntoDB = async (payload: IUser) => {
   }
 
   const jwtPayload = {
+    id: isUserExist?._id,
     email: payload.email,
     role: isUserExist.role,
   };
 
   const accessToken = jwt.sign(jwtPayload, config.JWT_ACCESS_SECRET as string, {
-    expiresIn: "7d",
+    expiresIn: "1d",
   });
 
   return accessToken;
 };
-
-export interface IUserFilters {
-  email?: string;
-  role?: string;
-}
 
 const getUserFromDB = async (
   page: number = 1,
@@ -89,6 +90,7 @@ const getUserFromDB = async (
 
 const getUserByEmailFromDB = async (payload: string) => {
   const user = await User.findOne({ email: payload });
+  console.log(user);
 
   if (!user) {
     throw new AppError(status.BAD_REQUEST, "User Doesn't Exist", "");

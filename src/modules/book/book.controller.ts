@@ -31,8 +31,8 @@ const getAllBook = async (req: Request, res: Response) => {
   } = req.query;
 
   const filterCondition: Record<string, unknown> = {};
-  if (filterCondition) {
-    filterCondition.genre = filter?.toString().toUpperCase();
+  if (filter) {
+    filterCondition.genre = filter.toString().toUpperCase();
   }
 
   const sortCondition: Record<string, SortOrder> = {};

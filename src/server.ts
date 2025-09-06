@@ -3,28 +3,14 @@ import cors from "cors";
 import mongoose from "mongoose";
 import config from "./config";
 import routes from "./modules/routes";
-
-const app = express();
-
-app.use(
-  cors({
-    origin: ["https://paper-trail-ui.vercel.app", "http://localhost:5173"],
-    credentials: true,
-  })
-);
+import cookieParser from "cookie-parser";
+import app from "./app";
 
 app.use(express.json());
 app.use(routes);
 
 app.listen(config.port, () => {
   console.log(` server is running on port ${config.port}`);
-});
-
-app.get("/", (req: Request, res: Response) => {
-  res.send({
-    success: true,
-    message: "PaperTrail is Running",
-  });
 });
 
 async function server() {

@@ -7,7 +7,7 @@ const createUserZodSchema = z.object({
     .min(3, "Name must be minimum 3 character")
     .max(255, "Name must be maximum 255 character"),
   email: z.email({ error: "please enter a valid email" }),
-  phone: z.string(),
+  // phone: z.string(),
   password: z.string(),
   role: z.enum(UserRole),
   profilePicture: z

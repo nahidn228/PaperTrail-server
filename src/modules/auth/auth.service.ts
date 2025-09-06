@@ -7,15 +7,12 @@ import AppError from "../../error/AppError";
 import jwt, { JwtPayload, SignOptions } from "jsonwebtoken";
 import { ILoginCredentials, IRegisterData } from "./auth.interface";
 
-
 const createUserIntoDB = async (payload: IRegisterData) => {
   payload.password = await bcrypt.hash(
     payload.password,
     Number(config.BCRYPT_SALT_ROUND)
   );
   const data = await User.create(payload);
-
-
 
   return data;
 };
@@ -40,6 +37,7 @@ const loginUserIntoDB = async (payload: ILoginCredentials) => {
   }
 
   const jwtPayload = {
+    id: isUserExist?._id,
     email: payload.email,
     role: isUserExist.role,
   };
@@ -79,7 +77,6 @@ const changePasswordIntoDB = async (
 
   if (!isPasswordMatched) {
     throw new AppError(Number(status[403]), "Password Not Matched", "");
-    
   }
 
   isUserExist.password = await bcrypt.hash(

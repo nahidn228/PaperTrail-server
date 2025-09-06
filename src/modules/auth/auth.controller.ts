@@ -27,15 +27,20 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
 
   res.cookie("accessToken", data.accessToken, {
     secure: config.node_env !== "development",
+    // secure: true,
+    // secure: false,
     httpOnly: true,
-    sameSite: "none",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    // sameSite: "none",
   });
 
   res.cookie("refreshToken", data.refreshToken, {
     secure: config.node_env !== "development",
-    httpOnly: true,
     // secure: true,
-    sameSite: "none",
+    // secure: false,
+    httpOnly: true,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    // sameSite: "none",
   });
 
   sendResponse(res, {
