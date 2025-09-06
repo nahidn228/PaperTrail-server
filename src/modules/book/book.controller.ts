@@ -28,6 +28,7 @@ const getAllBook = async (req: Request, res: Response) => {
     sortBy = "createdAt",
     sort = "asc",
     limit = "10",
+    page = "1",
   } = req.query;
 
   const filterCondition: Record<string, unknown> = {};
@@ -38,9 +39,15 @@ const getAllBook = async (req: Request, res: Response) => {
   const sortCondition: Record<string, SortOrder> = {};
   sortCondition[sortBy.toString()] = sort === "desc" ? -1 : 1;
 
+  const pageNumber = Number(page);
+  const pageSize = Number(limit);
+
   const data = await Book.find(filterCondition)
     .sort(sortCondition)
-    .limit(Number(limit));
+    .skip((pageNumber - 1) * pageSize)
+    .limit(pageSize);
+
+  const total = await Book.countDocuments(filterCondition);
 
   // const data = await Book.find();
 
@@ -49,6 +56,12 @@ const getAllBook = async (req: Request, res: Response) => {
     success: true,
     message: "Books retrieved successfully",
     data: data,
+    meta: {
+      total,
+      page: pageNumber,
+      limit: pageSize,
+      totalPages: Math.ceil(total / pageSize),
+    },
   });
 };
 
