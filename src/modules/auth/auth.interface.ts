@@ -14,7 +14,7 @@ export interface ILoginCredentials {
 export interface IRegisterData {
   name: string;
   email: string;
-  phone: string;
+  phone?: string;
   password: string;
   role: UserRole;
   nid?: string;

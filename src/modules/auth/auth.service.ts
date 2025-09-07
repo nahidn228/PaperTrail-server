@@ -12,6 +12,10 @@ const createUserIntoDB = async (payload: IRegisterData) => {
     payload.password,
     Number(config.BCRYPT_SALT_ROUND)
   );
+
+  console.log("from auth service", payload);
+
+  
   const data = await User.create(payload);
 
   return data;

@@ -4,4 +4,5 @@ export interface IBorrow {
   bookId: Types.ObjectId;
   quantity: number;
   dueDate: Date;
+  email: string;
 }

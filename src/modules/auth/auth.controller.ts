@@ -10,6 +10,8 @@ import { sendResponse } from "../../utils/SendResponse";
 const registerUser = catchAsync(async (req: Request, res: Response) => {
   const payload = req.body;
 
+  console.log("from auth controller", payload);
+
   const data = await AuthServices.createUserIntoDB(payload);
 
   sendResponse(res, {

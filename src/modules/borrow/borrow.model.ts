@@ -1,18 +1,19 @@
 import { Schema, model } from "mongoose";
 import { IBorrow } from "./borrow.interface";
 
-
 const borrowSchema = new Schema<IBorrow>(
   {
     bookId: { type: Schema.Types.ObjectId, ref: "Book", required: true },
-    quantity: { type: Number, required: true, min: [1, "minimum quantity should be  1"], },
+    quantity: {
+      type: Number,
+      required: true,
+      min: [1, "minimum quantity should be  1"],
+    },
     dueDate: { type: Date, required: true },
+    email: { type: String, required: true },
   },
   { timestamps: true, versionKey: false }
 );
-
-
-
 
 const Borrow = model<IBorrow>("Borrow", borrowSchema);
 export default Borrow;

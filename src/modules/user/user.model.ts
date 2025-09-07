@@ -29,14 +29,14 @@ const userSchema = new Schema<IUser>(
     },
     phone: {
       type: String,
-      required: [true, "Your Phone number is not valid"],
+      // required: [true, "Your Phone number is not valid"],
       validate: {
         validator: function (value) {
           return /^(?:\+88|88)?01[3-9]\d{8}$/.test(value);
         },
         message: (props) => `${props.value} is not a valid phone number!`,
       },
-      immutable: true,
+
       unique: [true, "This Phone already exist"],
     },
     password: {
@@ -85,7 +85,5 @@ const userSchema = new Schema<IUser>(
 );
 
 const User = model<IUser>("User", userSchema);
-
-
 
 export default User;
