@@ -10,10 +10,7 @@ const userSchema = new Schema<IUser>(
       min: 3,
       max: 255,
     },
-    // wallet: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "Wallet",
-    // },
+
     email: {
       type: String,
       required: [true, "User email required"],
@@ -29,9 +26,11 @@ const userSchema = new Schema<IUser>(
     },
     phone: {
       type: String,
+      sparse: true,
       // required: [true, "Your Phone number is not valid"],
       validate: {
         validator: function (value) {
+          if (!value) return true;
           return /^(?:\+88|88)?01[3-9]\d{8}$/.test(value);
         },
         message: (props) => `${props.value} is not a valid phone number!`,

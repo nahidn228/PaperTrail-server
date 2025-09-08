@@ -13,25 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const cors_1 = __importDefault(require("cors"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const config_1 = __importDefault(require("./config"));
 const routes_1 = __importDefault(require("./modules/routes"));
-const app = (0, express_1.default)();
-app.use((0, cors_1.default)({
-    origin: ["https://paper-trail-ui.vercel.app", "http://localhost:5173"],
-    credentials: true,
-}));
-app.use(express_1.default.json());
-app.use(routes_1.default);
-app.listen(config_1.default.port, () => {
+const app_1 = __importDefault(require("./app"));
+app_1.default.use(express_1.default.json());
+app_1.default.use(routes_1.default);
+app_1.default.listen(config_1.default.port, () => {
     console.log(` server is running on port ${config_1.default.port}`);
-});
-app.get("/", (req, res) => {
-    res.send({
-        success: true,
-        message: "PaperTrail is Running",
-    });
 });
 function server() {
     return __awaiter(this, void 0, void 0, function* () {

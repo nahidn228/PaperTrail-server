@@ -10,6 +10,7 @@ const app: Application = express();
 app.use(
   cors({
     origin: ["https://paper-trail-ui.vercel.app", "http://localhost:5173"],
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true,
   })
 );
