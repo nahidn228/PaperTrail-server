@@ -27,9 +27,22 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
 
   const data = await AuthServices.loginUserIntoDB(payload);
 
+  // res.cookie("accessToken", data.accessToken, {
+  //   secure: config.node_env !== "development",
+  //   httpOnly: true,
+  //   sameSite: "none",
+  // });
+
+  // res.cookie("refreshToken", data.refreshToken, {
+  //   secure: config.node_env !== "development",
+  //   httpOnly: true,
+  //   // secure: true,
+  //   sameSite: "none",
+  // });
+
   res.cookie("accessToken", data.accessToken, {
-    secure: config.node_env !== "development",
-    // secure: true,
+    // secure: config.node_env !== "development",
+    secure: true,
     // secure: false,
     httpOnly: true,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
@@ -37,8 +50,8 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   });
 
   res.cookie("refreshToken", data.refreshToken, {
-    secure: config.node_env !== "development",
-    // secure: true,
+    // secure: config.node_env !== "development",
+    secure: true,
     // secure: false,
     httpOnly: true,
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
